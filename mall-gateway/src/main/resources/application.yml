@@ -1,0 +1,24 @@
+#注册中心相关配置
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+    #网关配置
+    gateway:
+      routes:
+        - id: baidu_route
+          uri: http://www.baidu.com
+          predicates:
+            - Query=url, baidu
+
+        - id: qq_route
+          uri: http://www.qq.com
+          predicates:
+            - Query=url, qq
+
+  application:
+    name: mall-gateway
+server:
+  port: 8080
