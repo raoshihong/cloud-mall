@@ -1,6 +1,5 @@
 package com.rao.cloud.mall.common.utils;
 
-import com.welab.channel.iam.common.annotation.NoAuthentication;
 import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
