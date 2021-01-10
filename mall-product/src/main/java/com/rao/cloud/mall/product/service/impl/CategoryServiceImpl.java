@@ -1,7 +1,11 @@
 package com.rao.cloud.mall.product.service.impl;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -24,6 +28,35 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<CategoryEntity> tree() {
+
+        List<CategoryEntity> categoryEntities = this.list();
+
+        List<CategoryEntity> levelCategories =
+            categoryEntities.stream().filter(categoryEntity -> categoryEntity.getParentCid() == 0).collect(Collectors.toList());
+        levelCategories.forEach(categoryEntity -> {
+            categoryEntity.setChildren(getChildren(categoryEntity,categoryEntities));
+        });
+
+        return levelCategories;
+    }
+
+    @Override
+    public void removeMenuByIds(List<Long> ids) {
+        baseMapper.deleteBatchIds(ids);
+    }
+
+    private List<CategoryEntity> getChildren(CategoryEntity current,List<CategoryEntity> categoryEntities){
+        List<CategoryEntity> categoryEntityList =
+            categoryEntities.stream().filter(categoryEntity -> current.getCatId().equals(categoryEntity.getParentCid()))
+                .collect(Collectors.toList());
+        categoryEntityList.forEach(categoryEntity -> {
+            categoryEntity.setChildren(getChildren(categoryEntity,categoryEntities));
+        });
+        return categoryEntityList;
     }
 
 }

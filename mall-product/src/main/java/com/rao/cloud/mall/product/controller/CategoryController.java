@@ -40,6 +40,10 @@ public class CategoryController {
         return R.ok().put("page", page);
     }
 
+    @RequestMapping("/tree")
+    public R tree(){
+        return R.ok().put("data",categoryService.tree());
+    }
 
     /**
      * 信息
@@ -76,7 +80,9 @@ public class CategoryController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] catIds){
-		categoryService.removeByIds(Arrays.asList(catIds));
+//		categoryService.removeByIds(Arrays.asList(catIds));
+
+        categoryService.removeMenuByIds(Arrays.asList(catIds));
 
         return R.ok();
     }

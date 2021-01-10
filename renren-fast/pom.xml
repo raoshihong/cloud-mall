@@ -52,6 +52,18 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.rao.cloud.mall</groupId>
+			<artifactId>mall-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+				<!-- 不使用配置中心,则排除掉,否则会报endpoint错误 -->
+				<exclusion>
+					<groupId>com.alibaba.cloud</groupId>
+					<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>

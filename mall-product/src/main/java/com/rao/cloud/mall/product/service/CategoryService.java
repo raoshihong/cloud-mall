@@ -3,7 +3,9 @@ package com.rao.cloud.mall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rao.cloud.mall.common.utils.PageUtils;
 import com.rao.cloud.mall.product.entity.CategoryEntity;
+import org.apache.catalina.LifecycleState;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +18,9 @@ import java.util.Map;
 public interface CategoryService extends IService<CategoryEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    List<CategoryEntity> tree();
+
+    void removeMenuByIds(List<Long> ids);
 }
 

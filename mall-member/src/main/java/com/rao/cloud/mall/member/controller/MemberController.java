@@ -34,9 +34,6 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    @Autowired
-    private CouponFeignService couponFeignService;
-
     @Value("${member.user.name}")
     private String name;
 
@@ -45,13 +42,13 @@ public class MemberController {
 
     @RequestMapping("/coupons")
     public R memberCoupons(){
-        R r = couponFeignService.memberCoupons();
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setNickname("lisi");
         memberEntity.setUsername(name);
         memberEntity.setGender(gender);
-        return R.ok().put("coupons",r.get("coupons")).put("member",memberEntity);
+        return R.ok().put("member",memberEntity);
     }
+
 
     /**
      * 列表

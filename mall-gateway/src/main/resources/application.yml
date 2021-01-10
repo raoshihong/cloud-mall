@@ -1,24 +1,51 @@
-#注册中心相关配置
-spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-
-    #网关配置
-    gateway:
-      routes:
-        - id: baidu_route
-          uri: http://www.baidu.com
-          predicates:
-            - Query=url, baidu
-
-        - id: qq_route
-          uri: http://www.qq.com
-          predicates:
-            - Query=url, qq
-
-  application:
-    name: mall-gateway
-server:
-  port: 8080
+###注册中心相关配置
+#spring:
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 127.0.0.1:8848
+#
+#    #网关配置
+#    gateway:
+#      routes:
+#        - id: baidu_route
+#          uri: http://www.baidu.com
+#          predicates:
+#            - Query=url, baidu
+#
+#        - id: qq_route
+#          uri: http://www.qq.com
+#          predicates:
+#            - Query=url, qq
+#
+## 商品服务路由规则
+#        - id: mall-product-router
+#          uri: lb://mall-product
+#          predicates:
+#            - Path=/api/product/**
+#          filters:
+#            - RewritePath=/api/(?<segment>/?.*),/$\{segment}
+#
+## 网关访问地址 http://localhost:99/api/product/category/tree     重写后的地址   http://localhost:10000/product/category/tree
+#
+#        # id 为每个路由的唯一标识
+#        - id: renren-fast-router
+#          # uri为网关路由到目标地址,lb表示负载均衡,renren-fast表示注册中心中目标服务的名称
+#          uri: lb://renren-fast
+#          predicates:
+#            # 表示匹配到api/下任意地址都转发到renren-fast服务
+#            - Path=/api/**
+#          #自定义filter
+#          filters:
+#            # 表示匹配到任意/api/开头的地址,都重写为/renren-fast/开头的
+#            - RewritePath=/api/(?<segment>/?.*),/renren-fast/$\{segment}
+#
+#  #网关访问地址 http://localhost:99/api/captcha.jpg  重写后的地址 http://localhost:8080/renren-fast/captcha.jpg
+#
+#
+#
+#  application:
+#    name: mall-gateway
+#server:
+#  port: 99
+#

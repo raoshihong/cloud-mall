@@ -1,18 +1,22 @@
 package com.rao.cloud.mall.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 /**
- * ��Ʒ��������
+ * 商品三级分类
  * 
  * @author raoshihong
  * @email raoshihong@gmail.com
- * @date 2020-11-03 17:33:32
+ * @date 2021-01-10 14:26:41
  */
 @Data
 @TableName("pms_category")
@@ -20,41 +24,44 @@ public class CategoryEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * ����id
+	 * 分类id
 	 */
 	@TableId
 	private Long catId;
 	/**
-	 * ��������
+	 * 分类名称
 	 */
 	private String name;
 	/**
-	 * ������id
+	 * 父分类id
 	 */
 	private Long parentCid;
 	/**
-	 * �㼶
+	 * 层级
 	 */
 	private Integer catLevel;
 	/**
-	 * �Ƿ���ʾ[0-����ʾ��1��ʾ]
+	 * 是否显示[0-不显示，1显示]
 	 */
+	@TableLogic(value = "1",delval = "0")
 	private Integer showStatus;
 	/**
-	 * ����
+	 * 排序
 	 */
 	private Integer sort;
 	/**
-	 * ͼ���ַ
+	 * 图标地址
 	 */
 	private String icon;
 	/**
-	 * ������λ
+	 * 计量单位
 	 */
 	private String productUnit;
 	/**
-	 * ��Ʒ����
+	 * 商品数量
 	 */
 	private Integer productCount;
 
+	@TableField(exist = false)
+	private List<CategoryEntity> children;
 }

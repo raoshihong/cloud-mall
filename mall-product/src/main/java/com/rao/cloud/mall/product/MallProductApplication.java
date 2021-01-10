@@ -31,7 +31,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  *	mybatis-plus:
  *
  *
- * 4. 添加@EnableDiscoveryClient,开启服务注册中心
+ * 4. 添加@EnableDiscoveryClient,开启服务注册中心,使用该注解,当服务启动时,会自动将该服务注册到注册中心去
  */
 @EnableDiscoveryClient
 @MapperScan("com.rao.cloud.mall.product.dao")
